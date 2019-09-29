@@ -1,0 +1,82 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    //public GameObject m_Player;
+    public float m_Force;
+    public float m_Jump;
+    public float m_Rotate;
+    private Rigidbody m_RB;
+
+    public Camera m_MainCam;
+    public Camera m_GunCam;
+
+    // Use this for initialization
+    void Start()
+    {
+        m_RB = GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        //movement
+        if (Input.GetKey(KeyCode.W))
+        {
+            m_RB.AddForce(transform.forward * m_Force);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            m_RB.AddForce(transform.right * m_Force);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            m_RB.AddForce(-transform.right * m_Force);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            m_RB.AddForce(-transform.forward * m_Force);
+        }
+
+        //rotation
+        if (Input.GetKey(KeyCode.Q))
+        {
+            //transform.Rotate(0.0f, -m_Rotate, 0.0f);
+            //m_RB.MoveRotation(new Quaternion(0.0f, -m_Rotate, 0.0f, 0.0f));
+            transform.Rotate(Vector3.left * Time.deltaTime);
+
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            //transform.Rotate(0.0f, m_Rotate, 0.0f);
+            transform.Rotate(Vector3.right * Time.deltaTime);
+        }
+
+        //jump
+        if (Input.GetKey(KeyCode.Space))
+        {
+            m_RB.AddForce(transform.up * m_Jump);
+        }
+
+        //Gun Cam
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            m_MainCam.enabled = false;
+            m_GunCam.enabled = true;
+            GetComponent<MeshRenderer>().enabled = false;
+            //Debug.Log("GunCam");
+        }
+        else
+        {
+            m_MainCam.enabled = true;
+            m_GunCam.enabled = false;
+            GetComponent<MeshRenderer>().enabled = true;
+            //Debug.Log("Cam");
+        }
+
+
+    }
+}
