@@ -27,7 +27,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[AddComponentMenu("VRSS/Desktop/CameraControll")]
 public class CameraMove : MonoBehaviour
 {
     //Mouse
@@ -61,24 +60,33 @@ public class CameraMove : MonoBehaviour
      public float m_distance;
 
      public LayerMask m_LayerMask;*/
-
+    [Space(1)]
+    [Header("GameObjects")]
     public Transform m_CameraTransform;
     public Transform m_Parent;
 
     public GameObject m_CamPivot;
     public Camera m_Cam;
-
+    [Space(1)]
+    [Header("Other")]
     public Vector3 m_LocalRotation;
     public Vector3 m_ScreenPoint;
     public Vector3 m_Offset;
 
-    public float m_MouseSensitivity = 4f;
+    [Space(1)]
     public float m_OrbitDamp = 10f;
     public float m_MoveSpeed = 0.1f;
     public float m_CamDistance = 1.5f;
+
+
+    [Space(1)][Header("Mouse Settings")]
+    public float m_MouseSensitivity = 4f;
+    [Header("Clamp Val")]
     public float m_YLoc = 45f;
     public float m_XLoc = 45f;
-    public int m_Temp;
+    [Header("Visability")]
+    public bool m_CursorLock;
+    private bool m_cursorIsLocked = true;
 
     // Use this for initialization
     void Start()
@@ -100,7 +108,7 @@ public class CameraMove : MonoBehaviour
 
     void Update()
     {
-
+        CursorUpdate();
         //m_ScreenPoint = m_Cam.WorldToScreenPoint(Input.mousePosition);
         //m_Offset = m_ScreenPoint - m_Cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, hit.distance));
         // Debug.Log(Input.mousePosition);
@@ -119,6 +127,28 @@ public class CameraMove : MonoBehaviour
         Quaternion m_Qt = Quaternion.Euler(m_LocalRotation.y, m_LocalRotation.x, 0);
         m_Parent.rotation = Quaternion.Lerp(m_Parent.rotation, m_Qt, Time.deltaTime * m_OrbitDamp);
 
+    }
+    private void CursorUpdate()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            m_cursorIsLocked = false;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            m_cursorIsLocked = true;
+        }
+
+        if (m_cursorIsLocked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     void LateUpdate()

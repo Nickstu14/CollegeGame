@@ -208,14 +208,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3258092}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.074978724, z: 0, w: 0.9971852}
   m_LocalPosition: {x: 122.8, y: 1.5, z: 386.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 627710414}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 8.6, z: 0}
 --- !u!54 &3258097
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
@@ -245,7 +245,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Force: 50
-  m_Jump: 10
+  m_JumpForce: 1000
+  m_Jump: 0
+  m_Jumping: 0
   m_Rotate: 10
   m_MainCam: {fileID: 1891951002}
   m_GunCam: {fileID: 802124387}
@@ -607,10 +609,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Spawn: {fileID: 722771266}
   m_Bullet: {fileID: 1451080744718994, guid: ddad877bf36307649a30f26cad3d6f87, type: 3}
-  m_BulletSpeed: 1000
-  m_BulletList: []
-  m_BulletTime: 2
   m_MaxBullet: 20
+  m_BulletList: []
+  m_BulletDuration: 0.5
+  m_BulletSpeed: 10000
 --- !u!4 &1210699533 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793,
@@ -697,7 +699,7 @@ BoxCollider:
   m_GameObject: {fileID: 1262446333}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -927,7 +929,7 @@ BoxCollider:
   m_GameObject: {fileID: 1835661234}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1081,10 +1083,10 @@ MonoBehaviour:
   m_LocalRotation: {x: 0, y: 0, z: 0}
   m_ScreenPoint: {x: 0, y: 0, z: 0}
   m_Offset: {x: 0, y: 0, z: 0}
-  m_MouseSensitivity: 5
   m_OrbitDamp: 10
   m_MoveSpeed: 0.1
   m_CamDistance: 1.43
+  m_MouseSensitivity: 5
   m_YLoc: 45
   m_XLoc: 45
-  m_Temp: 0
+  m_CursorLock: 0
