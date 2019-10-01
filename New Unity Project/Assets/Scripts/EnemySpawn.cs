@@ -15,6 +15,7 @@ public class EnemySpawn : MonoBehaviour
     [Header("Map Dims")]
     public float m_Width;
     public float m_Length;
+    private float m_Min = 0;
 
     [Space(2)]
     [Header("Enemies")]
@@ -46,5 +47,16 @@ public class EnemySpawn : MonoBehaviour
     void Update()
     {
 
+    }
+
+    Vector3 CalculateSpawnPos()
+    {
+       Vector3 m_Loc = new Vector3();
+
+        m_Loc.x = Random.Range((m_Player.transform.position.x - m_SpawnWidth) - m_Min, (m_Player.transform.position.x + m_SpawnWidth) + m_Length);
+        m_Loc.z = Random.Range((m_Player.transform.position.z - m_SpawnWidth) - m_Min, (m_Player.transform.position.z + m_SpawnWidth) + m_Width);
+        m_Loc.y = m_Player.transform.position.y;
+
+        return m_Loc;
     }
 }

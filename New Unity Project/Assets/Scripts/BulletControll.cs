@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletControll : MonoBehaviour
 {
 
-    private bool m_Delete;
+    public bool m_Delete;
 
     public float m_Time;
     //public float m_BulletDuration;
