@@ -29,41 +29,12 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    //Mouse
-    /* private Transform m_CameraTransform;
-     public Transform m_Parent;
-
-     private Vector3 m_LocalRotation;
-     private Vector3 m_vec;
-     private float m_CamDistance = 1.5f;
-
-     public float m_MouseSensitivity = 4f;
-     public float m_KeySpeed = 40f;
-     public float m_ScrollSensitivity = 2f;
-     public float m_OrbitDamp = 10f;
-     public float m_ScrollDamp = 6f;
-     public float m_MoveSpeed = 0.1f;
-
-     private bool m_Panning = false;
-     private bool m_Moving;
-     private bool m_Debug;
-     private bool m_ObjectSelect;
-     private bool m_MenuScroll;
-
-     public GameObject m_Object;
-
-     private Camera m_Cam;
-
-     public Vector3 m_ScreenPoint;
-     public Vector3 m_Offset;
-     public RaycastHit hit;
-     public float m_distance;
-
-     public LayerMask m_LayerMask;*/
+   
     [Space(1)]
     [Header("GameObjects")]
     public Transform m_CameraTransform;
     public Transform m_Parent;
+    public GameObject m_Player;
 
     public GameObject m_CamPivot;
     public Camera m_Cam;
@@ -78,11 +49,11 @@ public class CameraMove : MonoBehaviour
     public float m_MoveSpeed = 0.1f;
     public float m_CamDistance = 1.5f;
 
-
     [Space(1)][Header("Mouse Settings")]
     public float m_MouseSensitivity = 4f;
     [Header("Clamp Val")]
-    public float m_YLoc = 45f;
+    public float m_YMaxLoc = 45f;
+    public float m_YMinLoc = 10f;
     public float m_XLoc = 45f;
     [Header("Visability")]
     public bool m_CursorLock;
@@ -94,14 +65,6 @@ public class CameraMove : MonoBehaviour
         m_CameraTransform = this.transform;
         m_Parent = this.transform.parent;
         m_Cam = GetComponent<Camera>();
-
-        /*m_TargetPos = transform.position;
-
-        m_Moving = false;
-        m_Debug = false;
-        m_ObjectSelect = false;
-        m_Object = null;*/
-        // m_ModuleMenu = null;
     }
 
 
@@ -109,33 +72,29 @@ public class CameraMove : MonoBehaviour
     void Update()
     {
         CursorUpdate();
-        //m_ScreenPoint = m_Cam.WorldToScreenPoint(Input.mousePosition);
-        //m_Offset = m_ScreenPoint - m_Cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, hit.distance));
-        // Debug.Log(Input.mousePosition);
-
-
+      
         //Moves camera around
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
             m_LocalRotation.x += Input.GetAxis("Mouse X") * m_MouseSensitivity;
             m_LocalRotation.y -= Input.GetAxis("Mouse Y") * m_MouseSensitivity;
-            m_LocalRotation.y = Mathf.Clamp(m_LocalRotation.y, -m_YLoc, m_YLoc);
-            m_LocalRotation.x = Mathf.Clamp(m_LocalRotation.x, -m_XLoc, m_XLoc);
+            m_LocalRotation.y = Mathf.Clamp(m_LocalRotation.y, -m_YMaxLoc, m_YMinLoc);
+            //m_LocalRotation.x = Mathf.Clamp(m_LocalRotation.x, -m_XLoc, m_XLoc);
         }
-        //Debug.Log(Input.GetAxis("Mouse X"));
-        //Debug.Log(Input.GetAxis("Mouse Y"));
-        Quaternion m_Qt = Quaternion.Euler(m_LocalRotation.y, m_LocalRotation.x, 0);
-        m_Parent.rotation = Quaternion.Lerp(m_Parent.rotation, m_Qt, Time.deltaTime * m_OrbitDamp);
 
+        Quaternion m_Qt = Quaternion.Euler(m_LocalRotation.y, m_LocalRotation.x, 0);
+        //m_Parent.rotation = Quaternion.Lerp(m_Parent.rotation, m_Qt, Time.deltaTime * m_OrbitDamp);
+        m_Player.transform.rotation = Quaternion.Lerp(m_Player.transform.rotation, m_Qt, Time.deltaTime * m_OrbitDamp);
     }
     private void CursorUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        //if esc or the right mouse button is clicked then display cursor
+        if (Input.GetKeyUp(KeyCode.Escape)|| Input.GetMouseButtonUp(1))
         {
             m_cursorIsLocked = false;
         }
         else if (Input.GetMouseButtonUp(0))
-        {
+        {//if right mouse button is pressed then hide cursor
             m_cursorIsLocked = true;
         }
 

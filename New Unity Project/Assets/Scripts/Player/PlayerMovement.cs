@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public bool m_Jumping;
     public float m_Rotate;
     private Rigidbody m_RB;
+    private SphereCollider m_SC;
 
     public Camera m_MainCam;
     public Camera m_GunCam;
@@ -20,6 +21,11 @@ public class PlayerMovement : MonoBehaviour
     {
         m_RB = GetComponent<Rigidbody>();
         m_Jump = false;
+        m_SC = GetComponent<SphereCollider>();
+        if (m_SC.isTrigger == false)
+        {
+            m_SC.isTrigger = true;
+        }
     }
 
     // Update is called once per frame
@@ -52,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
 
         //update the position
         transform.position = transform.position + new Vector3(horizontalInput * m_Force * Time.deltaTime, 0, verticalInput * m_Force * Time.deltaTime);
-
 
         //rotation
         if (Input.GetKey(KeyCode.Q))
