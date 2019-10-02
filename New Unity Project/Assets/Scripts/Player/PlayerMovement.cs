@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //public GameObject m_Player;
+    public GameObject m_Player;
     public float m_Force;
     public float m_JumpForce;
     public bool m_Jump;
@@ -12,9 +12,12 @@ public class PlayerMovement : MonoBehaviour
     public float m_Rotate;
     private Rigidbody m_RB;
     private SphereCollider m_SC;
-
+    private Vector2 m_Input;
     public Camera m_MainCam;
     public Camera m_GunCam;
+
+    public Vector3 m_CamF;
+    public Vector3 m_CamR;
 
     // Use this for initialization
     void Start()
@@ -52,12 +55,23 @@ public class PlayerMovement : MonoBehaviour
         }*/
 
         //get the Input from Horizontal axis
-        float horizontalInput = Input.GetAxis("Horizontal");
+        m_Input = new Vector2( Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        m_Input = Vector2.ClampMagnitude(m_Input, 1);
         //get the Input from Vertical axis
-        float verticalInput = Input.GetAxis("Vertical");
+
+        m_CamF = m_MainCam.transform.forward;
+        m_CamR = m_MainCam.transform.right;
+
+        m_CamF.y = 0;
+        m_CamR.y = 0;
+        m_CamF = m_CamF.normalized;
+        m_CamR = m_CamR.normalized;
+
+        transform.position += (m_CamF * m_Input.y + m_CamR * m_Input.x) * Time.deltaTime * m_Force;
+        
 
         //update the position
-        transform.position = transform.position + new Vector3(horizontalInput * m_Force * Time.deltaTime, 0, verticalInput * m_Force * Time.deltaTime);
+       // transform.position = transform.position + new Vector3(horizontalInput * m_Force * Time.deltaTime, 0, verticalInput * m_Force * Time.deltaTime);
 
         //rotation
         if (Input.GetKey(KeyCode.Q))
