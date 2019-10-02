@@ -8,11 +8,13 @@ public class BulletControll : MonoBehaviour
     public bool m_Delete;
 
     public float m_Time;
+    public int m_Damage;
     //public float m_BulletDuration;
     //public List<Vector3> m_Pos = new List<Vector3>();
     // Use this for initialization
     void Start()
     {
+        m_Damage = 10;
        // m_Pos = new List<Vector3>();
     }
 
@@ -35,5 +37,10 @@ public class BulletControll : MonoBehaviour
     public void SetDelete()
     {
         m_Delete = true;
+    }
+
+    public int GetDamage()
+    {
+        return m_Damage;
     }
 }

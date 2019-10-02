@@ -129,4 +129,10 @@ public class PlayerMovement : MonoBehaviour
             m_Jump = Input.GetKeyDown(KeyCode.Space);
         }
     }
+    public void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.tag == "Bullet" && gameObject.tag == "Player") 
+            gameObject.GetComponent<Details>().ModHealth(other.GetComponent<BulletControll>().GetDamage());
+    }
 }

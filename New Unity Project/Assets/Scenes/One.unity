@@ -135,9 +135,10 @@ GameObject:
   - component: {fileID: 3258097}
   - component: {fileID: 3258099}
   - component: {fileID: 3258098}
+  - component: {fileID: 3258100}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a47bb014a9903d34b91e1cb180a34b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Player: {fileID: 0}
   m_Force: 50
   m_JumpForce: 1000
   m_Jump: 0
@@ -254,6 +256,8 @@ MonoBehaviour:
   m_Rotate: 10
   m_MainCam: {fileID: 1891951002}
   m_GunCam: {fileID: 802124387}
+  m_CamF: {x: 0, y: 0, z: 0}
+  m_CamR: {x: 0, y: 0, z: 0}
 --- !u!135 &3258099
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -267,6 +271,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 25
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3258100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cfe1d4db6dc1414d85e85e2f5cf3bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_Player: 1
+  m_Health: 0
 --- !u!1 &222297899
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,6 +411,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &269084234 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4608573614568340844, guid: ac36497d355e3c54faa9df8b93ef59e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8688817464718859841}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &269084241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269084234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cfe1d4db6dc1414d85e85e2f5cf3bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_Player: 0
+  m_Health: 0
 --- !u!1001 &399797040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1211,6 +1251,11 @@ PrefabInstance:
     - target: {fileID: 9058191556726749768, guid: ac36497d355e3c54faa9df8b93ef59e0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3365329711760484028, guid: ac36497d355e3c54faa9df8b93ef59e0,
+        type: 3}
+      propertyPath: m_Delete
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
