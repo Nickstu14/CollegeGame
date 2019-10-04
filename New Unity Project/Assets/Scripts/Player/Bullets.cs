@@ -26,7 +26,7 @@ public class Bullets : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //on click  shoot
         if (Input.GetMouseButton(0))//Input.GetMouseButtonDown(0))
@@ -49,7 +49,7 @@ public class Bullets : MonoBehaviour
                 if (m_B.GetComponent<BulletControll>().GetTime() >= m_BulletDuration)
                 {
                     m_B.GetComponent<BulletControll>().SetDelete();
-                    m_BulletList.RemoveAt(m_BulletCount);
+                    m_BulletList.RemoveAt(0);
                     // Debug.Log("Destroyed");
                 }
                 m_BulletCount++;

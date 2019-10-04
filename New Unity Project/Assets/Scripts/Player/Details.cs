@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Details : MonoBehaviour
 {
-    public string m_Name;
+    public string m_ForeName;
+    public string m_SureName;
+    public string m_Title;
     public bool m_Player;
     public int m_Health;
 
@@ -13,12 +15,12 @@ public class Details : MonoBehaviour
     {
         if (m_Player)
         {
-            SetName("Tic Tac");
+            SetName("Mr", "Tic", " Tac");
             SetHealth(100);
         }
         else
         {
-            SetName("Enemy");
+            SetName("Mr", "Enemy");
             SetHealth(10);
         }
     }
@@ -26,17 +28,19 @@ public class Details : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_Health <= 0)
+        if (m_Health <= 0)
             GameObject.Destroy(gameObject);
     }
-    public void SetName(string _Name)
+    public void SetName(string _title = "Mr", string _Forename = "", string _Surename = "")
     {
-        m_Name =  "Enemy";
+        m_Title = _title;
+        m_ForeName = _Forename;
+        m_SureName = _Surename;
     }
 
     public string GetName()
     {
-        return m_Name;
+        return m_Title + " " + m_ForeName + " " + m_SureName;
     }
 
     public void SetHealth(int _Health)

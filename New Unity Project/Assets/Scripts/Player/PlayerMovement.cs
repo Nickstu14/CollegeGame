@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         
-        if (other.tag == "Bullet" && gameObject.tag == "Player") 
+        if (other.tag == "Bullet" && gameObject.tag != "Player") 
             gameObject.GetComponent<Details>().ModHealth(other.GetComponent<BulletControll>().GetDamage());
     }
 }

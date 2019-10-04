@@ -7,6 +7,8 @@ public class EnemyMovement : MonoBehaviour
     public bool m_Delete;
     public GameObject m_Player;
 
+    public Collider m_Temp;
+
     public bool m_AimAtPlayer;
     // Start is called before the first frame update
     void Start()
@@ -38,12 +40,19 @@ public class EnemyMovement : MonoBehaviour
             m_Player = other.gameObject;
             m_AimAtPlayer = true;
         }
-        if (other.tag == "Bullet")
-            gameObject.GetComponent<Details>().ModHealth(other.GetComponent<BulletControll>().GetDamage());
+        //if (other.tag == "Bullet")
+           // gameObject.GetComponent<Details>().ModHealth(other.GetComponent<BulletControll>().GetDamage());
     }
     public void OnTriggerExit(Collider other)
     {
 
         m_AimAtPlayer = false;
     }
+    public void OnCollisionEnter(Collision collision)
+    {
+        m_Temp = collision.collider;
+       // print(collision.collider.);
+        gameObject.GetComponent<Details>().ModHealth(collision.gameObject.GetComponent<BulletControll>().GetDamage());
+    }
+    
 }
