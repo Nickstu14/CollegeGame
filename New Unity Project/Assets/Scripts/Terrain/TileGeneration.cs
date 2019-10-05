@@ -29,7 +29,17 @@ public class TileGeneration : MonoBehaviour
     private AnimationCurve m_HeightCurve;
 
     [SerializeField]
-    private Wave[] m_Waves;
+    private NoiseMapGeneration.Wave[] m_Waves;
+
+    [SerializeField]
+    private TerrainType[] m_HeightTerrainTypes;
+
+    [SerializeField]
+    private TerrainType[] m_HeatTerrainTypes;
+
+    [SerializeField]
+    private VisualizationMode m_VisualizationMode;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +49,7 @@ public class TileGeneration : MonoBehaviour
         m_MeshFilter = gameObject.GetComponent<MeshFilter>();
         m_MeshCollider = gameObject.GetComponent<MeshCollider>();
 
-        GenerateTile();
+        GenerateTile(10f,11f);
     }
 
     // Update is called once per frame
@@ -48,7 +58,7 @@ public class TileGeneration : MonoBehaviour
 
     }
 
-    void GenerateTile()
+    void GenerateTile(float _CenterVertexZ, float _MaxDistanceZ)
     {
         Vector3[] m_MeshVertices = this.m_MeshFilter.mesh.vertices;
 
@@ -58,15 +68,43 @@ public class TileGeneration : MonoBehaviour
         float m_OffsetX = -this.gameObject.transform.position.x;
         float m_OffsetZ = -this.gameObject.transform.position.z;
 
-        float[,] m_HeightMap = this.m_NoiseMapGeneration.GenerateNoiseMap(m_TileDepth, m_TileWidth, this.m_MapScale, m_OffsetX, m_OffsetZ, m_Waves);
+        float[,] m_HeightMap = this.m_NoiseMapGeneration.GeneratePerlinNoiseMap(m_TileDepth, m_TileWidth, this.m_MapScale, m_OffsetX, m_OffsetZ, m_Waves);
 
-        Texture2D m_TileTexture = BuildTexture(m_HeightMap);
-        this.m_TileRenderer.material.mainTexture = m_TileTexture;
+        Vector3 m_TileDimensions = this.m_MeshFilter.mesh.bounds.size;
+        float m_DistanceBetweenVertices = m_TileDimensions.z / (float)m_TileDepth;
+        float m_VertexOffsetZ = this.gameObject.transform.position.z / m_DistanceBetweenVertices;
+
+        //Generate heatmap
+        float[,] m_UniformHeatMap = this.m_NoiseMapGeneration.GenerateUniformNoiseMap(m_TileDepth, m_TileWidth, _CenterVertexZ, _MaxDistanceZ, m_VertexOffsetZ);
+
+        float[,] m_RandomHeatMap = this.m_NoiseMapGeneration.GeneratePerlinNoiseMap(m_TileDepth, m_TileWidth, this.m_MapScale, _OffsetX, _OffsetZ, this.m_HeatWaves)
+
+
+        Texture2D m_HeightTexture = BuildTexture(m_HeightMap, this.m_HeightTerrainTypes);
+        Texture2D m_HeatTexture = BuildTexture(m_HeatMap, this.m_HeatTerrainTypes);
+
+        //Texture2D m_TileTexture = BuildTexture(m_HeightMap);
+        //this.m_TileRenderer.material.mainTexture = m_TileTexture;
+
+        switch(this.m_VisualizationMode)
+        {
+            case VisualizationMode.Height: this.m_TileRenderer.material.mainTexture = m_HeightTexture;
+                break;
+            case VisualizationMode.Heat: this.m_TileRenderer.material.mainTexture = m_HeatTexture;
+                break;
+        }
+        
         UpdateMeshVertices(m_HeightMap);
 
     }
 
-    private Texture2D BuildTexture(float[,] _HeightMap)
+    enum VisualizationMode
+    {
+        Height,
+        Heat
+    }
+
+    private Texture2D BuildTexture(float[,] _HeightMap, TerrainType[] _TerrainType)
     {
         int m_TileDepth = _HeightMap.GetLength(0);
         int m_TileWidth = _HeightMap.GetLength(1);
@@ -79,9 +117,9 @@ public class TileGeneration : MonoBehaviour
                 // transform the 2D map index is an Array index
                 int m_ColorIndex = m_Z * m_TileWidth + m_X;
                 float m_Height = _HeightMap[m_Z, m_X];
-                TerrainType terrainType = ChooseTerrainType(m_Height);
+                TerrainType m_TerrainType = ChooseTerrainType(m_Height, _TerrainType);
                 // assign as color a shade of grey proportional to the height value
-                m_ColorMap[m_ColorIndex] = terrainType.m_Colour; //Color.Lerp(Color.black, Color.white, m_Height);
+                m_ColorMap[m_ColorIndex] = m_TerrainType.m_Colour; //Color.Lerp(Color.black, Color.white, m_Height);
             }
         }
         // create a new texture and set its pixel colors
@@ -92,7 +130,7 @@ public class TileGeneration : MonoBehaviour
 
         return m_TileTexture;
     }
-    TerrainType ChooseTerrainType(float _Height)
+    TerrainType ChooseTerrainType(float _Height, TerrainType[] _TerrainTypes)
     {
         // for each terrain type, check if the height is lower than the one for the terrain type
         foreach (TerrainType terrainType in m_TerrainTypes)
@@ -143,13 +181,6 @@ public class TileGeneration : MonoBehaviour
         public string m_Name;
         public float m_Height;
         public Color m_Colour;
-    }
-    [System.Serializable]
-    public class Wave
-    {
-        public float m_Seed;
-        public float m_Frequency;
-        public float m_Amplitude;
     }
 
 }

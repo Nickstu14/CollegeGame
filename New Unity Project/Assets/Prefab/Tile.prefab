@@ -168,3 +168,28 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_Waves:
+  - m_Seed: 5613
+    m_Frequency: 1
+    m_Amplitude: 1
+  - m_Seed: 9551
+    m_Frequency: 0.5
+    m_Amplitude: 2
+  - m_Seed: 6712
+    m_Frequency: 0.25
+    m_Amplitude: 4
+  m_HeightTerrainTypes: []
+  m_HeatTerrainTypes:
+  - m_Name: Hottest
+    m_Height: 0.25
+    m_Colour: {r: 1, g: 0, b: 0, a: 0}
+  - m_Name: Hot
+    m_Height: 0.5
+    m_Colour: {r: 0.9858012, g: 1, b: 0, a: 0}
+  - m_Name: Cold
+    m_Height: 0.75
+    m_Colour: {r: 0.13705944, g: 0.44658136, b: 0.8301887, a: 0}
+  - m_Name: Coldest
+    m_Height: 1
+    m_Colour: {r: 0.09416164, g: 0.8679245, b: 0.8454272, a: 0}
+  m_VisualizationMode: 1

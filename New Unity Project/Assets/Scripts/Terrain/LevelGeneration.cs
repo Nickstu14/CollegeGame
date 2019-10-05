@@ -37,7 +37,8 @@ public class LevelGeneration : MonoBehaviour
                 this.gameObject.transform.position.y,
                 this.gameObject.transform.position.z + m_Z * m_TileDepth);
                 // instantiate a new Tile
-                GameObject tile = Instantiate(m_TilePrefab, m_TilePosition, Quaternion.identity) as GameObject;
+                GameObject m_tile = Instantiate(m_TilePrefab, m_TilePosition, Quaternion.identity) as GameObject;
+                m_tile.transform.parent = this.transform;
             }
         }
     }
