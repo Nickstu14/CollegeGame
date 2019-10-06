@@ -7,18 +7,27 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField]
     private int mapWidthInTiles, mapDepthInTiles;
 
+
     [SerializeField]
     private GameObject m_TilePrefab;
+
+    [SerializeField]
+    private TileGeneration.VisualizationMode m_VisualizationMode;
 
     void Start()
     {
         GenerateMap();
     }
     // Start is called before the first frame update
-    
+
+    public TileGeneration.VisualizationMode GetVisualizationMode()
+    {
+        return m_VisualizationMode;
+    }
+
     void Update()
     {
-        
+
     }
     void GenerateMap()
     {

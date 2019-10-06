@@ -135,6 +135,42 @@ MonoBehaviour:
   - m_Name: Mountian
     m_Height: 1
     m_Colour: {r: 0.4433962, g: 0.31852853, b: 0.13594696, a: 0}
+  m_HeightTerrainTypes:
+  - m_Name: 
+    m_Height: 0
+    m_Colour: {r: 0, g: 0, b: 0, a: 0}
+  - m_Name: 
+    m_Height: 0
+    m_Colour: {r: 0, g: 0, b: 0, a: 0}
+  - m_Name: 
+    m_Height: 0
+    m_Colour: {r: 0, g: 0, b: 0, a: 0}
+  m_HeatTerrainTypes:
+  - m_Name: Hottest
+    m_Height: 0.25
+    m_Colour: {r: 1, g: 0, b: 0, a: 0}
+  - m_Name: Hot
+    m_Height: 0.5
+    m_Colour: {r: 0.9858012, g: 1, b: 0, a: 0}
+  - m_Name: Cold
+    m_Height: 0.75
+    m_Colour: {r: 0.13705944, g: 0.44658136, b: 0.8301887, a: 0}
+  - m_Name: Coldest
+    m_Height: 1
+    m_Colour: {r: 0.09416164, g: 0.8679245, b: 0.8454272, a: 0}
+  m_MoistureTerrainTypes:
+  - m_Name: Dryest
+    m_Height: 0.25
+    m_Colour: {r: 0.8490566, g: 0.22828408, b: 0.22828408, a: 0}
+  - m_Name: Dry
+    m_Height: 0.5
+    m_Colour: {r: 0.7735849, g: 0.7710429, b: 0.1788003, a: 0}
+  - m_Name: Wet
+    m_Height: 0.75
+    m_Colour: {r: 0.18609823, g: 0.76783234, b: 0.7735849, a: 0}
+  - m_Name: Wettest
+    m_Height: 1
+    m_Colour: {r: 0.1432894, g: 0.38056308, b: 0.8679245, a: 0}
   m_HeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -168,7 +204,73 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Waves:
+  m_HeatCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.39992175
+      value: 0.0005189222
+      inSlope: -0.02348996
+      outSlope: -0.02348996
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.13936669
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_MoistureCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.39975578
+      value: -0.0010728631
+      inSlope: 0.01278894
+      outSlope: 0.01278894
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14773545
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_HeightWaves:
   - m_Seed: 5613
     m_Frequency: 1
     m_Amplitude: 1
@@ -178,18 +280,18 @@ MonoBehaviour:
   - m_Seed: 6712
     m_Frequency: 0.25
     m_Amplitude: 4
-  m_HeightTerrainTypes: []
-  m_HeatTerrainTypes:
-  - m_Name: Hottest
-    m_Height: 0.25
-    m_Colour: {r: 1, g: 0, b: 0, a: 0}
-  - m_Name: Hot
-    m_Height: 0.5
-    m_Colour: {r: 0.9858012, g: 1, b: 0, a: 0}
-  - m_Name: Cold
-    m_Height: 0.75
-    m_Colour: {r: 0.13705944, g: 0.44658136, b: 0.8301887, a: 0}
-  - m_Name: Coldest
-    m_Height: 1
-    m_Colour: {r: 0.09416164, g: 0.8679245, b: 0.8454272, a: 0}
-  m_VisualizationMode: 1
+  m_HeatWaves: []
+  m_MoistureWaves:
+  - m_Seed: 0
+    m_Frequency: 0
+    m_Amplitude: 0
+  - m_Seed: 0
+    m_Frequency: 0
+    m_Amplitude: 0
+  - m_Seed: 0
+    m_Frequency: 0
+    m_Amplitude: 0
+  - m_Seed: 0
+    m_Frequency: 0
+    m_Amplitude: 0
+  m_VisualizationMode: 2

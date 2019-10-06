@@ -26,16 +26,25 @@ public class TileGeneration : MonoBehaviour
     private TerrainType[] m_TerrainTypes;
 
     [SerializeField]
-    private AnimationCurve m_HeightCurve;
-
-    [SerializeField]
-    private NoiseMapGeneration.Wave[] m_Waves;
-
-    [SerializeField]
     private TerrainType[] m_HeightTerrainTypes;
-
     [SerializeField]
     private TerrainType[] m_HeatTerrainTypes;
+    [SerializeField]
+    private TerrainType[] m_MoistureTerrainTypes;
+
+    [SerializeField]
+    private AnimationCurve m_HeightCurve;
+    [SerializeField]
+    private AnimationCurve m_HeatCurve;
+    [SerializeField]
+    private AnimationCurve m_MoistureCurve;
+
+    [SerializeField]
+    private NoiseMapGeneration.Wave[] m_HeightWaves;
+    [SerializeField]
+    private NoiseMapGeneration.Wave[] m_HeatWaves;
+    [SerializeField]
+    private NoiseMapGeneration.Wave[] m_MoistureWaves;
 
     [SerializeField]
     private VisualizationMode m_VisualizationMode;
@@ -49,7 +58,9 @@ public class TileGeneration : MonoBehaviour
         m_MeshFilter = gameObject.GetComponent<MeshFilter>();
         m_MeshCollider = gameObject.GetComponent<MeshCollider>();
 
-        GenerateTile(10f,11f);
+        //m_VisualizationMode = gameObject.GetComponent<LevelGeneration>().GetVisualizationMode();
+
+        GenerateTile(1f,11f);
     }
 
     // Update is called once per frame
@@ -68,7 +79,7 @@ public class TileGeneration : MonoBehaviour
         float m_OffsetX = -this.gameObject.transform.position.x;
         float m_OffsetZ = -this.gameObject.transform.position.z;
 
-        float[,] m_HeightMap = this.m_NoiseMapGeneration.GeneratePerlinNoiseMap(m_TileDepth, m_TileWidth, this.m_MapScale, m_OffsetX, m_OffsetZ, m_Waves);
+        float[,] m_HeightMap = this.m_NoiseMapGeneration.GeneratePerlinNoiseMap(m_TileDepth, m_TileWidth, this.m_MapScale, m_OffsetX, m_OffsetZ, m_HeightWaves);
 
         Vector3 m_TileDimensions = this.m_MeshFilter.mesh.bounds.size;
         float m_DistanceBetweenVertices = m_TileDimensions.z / (float)m_TileDepth;
@@ -76,12 +87,30 @@ public class TileGeneration : MonoBehaviour
 
         //Generate heatmap
         float[,] m_UniformHeatMap = this.m_NoiseMapGeneration.GenerateUniformNoiseMap(m_TileDepth, m_TileWidth, _CenterVertexZ, _MaxDistanceZ, m_VertexOffsetZ);
+        float[,] m_RandomHeatMap = this.m_NoiseMapGeneration.GeneratePerlinNoiseMap(m_TileDepth, m_TileWidth, this.m_MapScale, m_OffsetX, m_OffsetZ, this.m_HeatWaves);
+        float[,] m_HeatMap = new float[m_TileDepth, m_TileWidth];
 
-        float[,] m_RandomHeatMap = this.m_NoiseMapGeneration.GeneratePerlinNoiseMap(m_TileDepth, m_TileWidth, this.m_MapScale, _OffsetX, _OffsetZ, this.m_HeatWaves)
+        for (int m_Z = 0; m_Z < m_TileDepth;m_Z++)
+        {
+            for (int m_X=0;m_OffsetX < m_TileWidth; m_OffsetX++)
+            {
+                m_HeatMap[m_Z, m_X] = m_UniformHeatMap[m_Z, m_X] * m_RandomHeatMap[m_Z, m_X];
+                m_HeatMap[m_Z, m_X] += this.m_HeatCurve.Evaluate(m_HeightMap[m_Z, m_X]) * m_HeightMap[m_Z, m_X];
+            }
+        }
 
+        float[,] m_MoistureMap = this.m_NoiseMapGeneration.GeneratePerlinNoiseMap(m_TileDepth, m_TileWidth, this.m_MapScale, m_OffsetX, m_OffsetZ, this.m_MoistureWaves);
+        for (int m_Z = 0; m_Z < m_TileDepth; m_Z++)
+        {
+            for (int m_X = 0; m_X < m_TileWidth; m_X++)
+            {
+                m_MoistureMap[m_Z, m_X] -= this.m_MoistureCurve.Evaluate(m_HeightMap[m_Z, m_X]) * m_HeightMap[m_Z, m_X];
+            }
+        }
 
         Texture2D m_HeightTexture = BuildTexture(m_HeightMap, this.m_HeightTerrainTypes);
         Texture2D m_HeatTexture = BuildTexture(m_HeatMap, this.m_HeatTerrainTypes);
+        Texture2D m_MoistureTexture = BuildTexture(m_MoistureMap, this.m_MoistureTerrainTypes);
 
         //Texture2D m_TileTexture = BuildTexture(m_HeightMap);
         //this.m_TileRenderer.material.mainTexture = m_TileTexture;
@@ -92,16 +121,19 @@ public class TileGeneration : MonoBehaviour
                 break;
             case VisualizationMode.Heat: this.m_TileRenderer.material.mainTexture = m_HeatTexture;
                 break;
+            case VisualizationMode.Moisture: this.m_TileRenderer.material.mainTexture = m_MoistureTexture;
+                break;
         }
         
         UpdateMeshVertices(m_HeightMap);
 
     }
 
-    enum VisualizationMode
+    public enum VisualizationMode
     {
         Height,
-        Heat
+        Heat,
+        Moisture
     }
 
     private Texture2D BuildTexture(float[,] _HeightMap, TerrainType[] _TerrainType)
