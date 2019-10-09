@@ -133,6 +133,6 @@ public class PlayerMovement : MonoBehaviour
     {
         
         if (other.tag == "Bullet" && gameObject.tag != "Player") 
-            gameObject.GetComponent<Details>().ModHealth(other.GetComponent<BulletControll>().GetDamage());
+            gameObject.GetComponent<Details>().ModHealth(other.GetComponent<Bullet>().GetDamage());
     }
 }

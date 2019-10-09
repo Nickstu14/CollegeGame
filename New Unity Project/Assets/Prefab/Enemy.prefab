@@ -186,8 +186,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delete: 0
-  m_temp: {fileID: 0}
+  m_Player: {fileID: 0}
+  m_Temp: {fileID: 0}
   m_AimAtPlayer: 0
+  m_Speed: 10
+  m_RotateSpeed: 0.25
+  m_Moving: 0.8
+  m_Forward: 0.6
+  m_TurningDirection: 0.5
 --- !u!114 &183929991097478249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,8 +206,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cfe1d4db6dc1414d85e85e2f5cf3bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Name: 
+  m_ForeName: 
+  m_SureName: 
+  m_Title: 
   m_Player: 0
+  m_Health: 0
 --- !u!1 &4898881901574736136
 GameObject:
   m_ObjectHideFlags: 0

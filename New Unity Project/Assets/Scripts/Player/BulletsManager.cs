@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullets : MonoBehaviour
+public class BulletsManager : MonoBehaviour
 {
     [Header("GameObjects")]
     public GameObject m_Spawn;
@@ -31,17 +31,17 @@ public class Bullets : MonoBehaviour
         //on click  shoot
         if (Input.GetMouseButton(0))//Input.GetMouseButtonDown(0))
         {
-            if (m_BulletList.Count < m_MaxBullet)
+            if (/*m_BulletList.Count*/ m_Spawn.transform.childCount< m_MaxBullet)
             {
-                GameObject m_BulletInstance = Instantiate(m_Bullet, m_Spawn.transform.position, new Quaternion(90.0f, 0.0f, 0.0f, 0.0f));
+                /*GameObject m_BulletInstance = Instantiate(m_Bullet, m_Spawn.transform.position, new Quaternion(90.0f, 0.0f, 0.0f, 0.0f));
                 m_BulletInstance.GetComponent<Rigidbody>().AddForce(m_Spawn.transform.forward * m_BulletSpeed);
-                //m_BulletInstance.transform.parent = m_Spawn.transform;
-                m_BulletList.Add(m_BulletInstance);
-                //Debug.Log("Bullet");
+                m_BulletInstance.transform.parent = m_Spawn.transform;*/
+                //m_BulletList.Add(m_BulletInstance);
+                //Debug.Log(m_Spawn.transform.childCount);
             }
         }
 
-        m_BulletCount = 0;
+        /*m_BulletCount = 0;
         if (m_BulletList.Count != 0)
         {
             foreach (GameObject m_B in m_BulletList)
@@ -54,6 +54,6 @@ public class Bullets : MonoBehaviour
                 }
                 m_BulletCount++;
             }
-        }
+        }*/
     }
 }
