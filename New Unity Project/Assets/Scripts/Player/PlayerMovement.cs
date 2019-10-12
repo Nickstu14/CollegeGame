@@ -70,23 +70,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position += (m_CamF * m_Input.y + m_CamR * m_Input.x) * Time.deltaTime * m_Force;
         
 
-        //update the position
-       // transform.position = transform.position + new Vector3(horizontalInput * m_Force * Time.deltaTime, 0, verticalInput * m_Force * Time.deltaTime);
-
-        //rotation
-        if (Input.GetKey(KeyCode.Q))
-        {
-            transform.Rotate(0.0f, -m_Rotate * Time.deltaTime, 0.0f);
-            //m_RB.MoveRotation(new Quaternion(0.0f, -m_Rotate, 0.0f, 0.0f));
-            //transform.Rotate(Vector3.left * Time.deltaTime * m_Rotate);
-
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            transform.Rotate(0.0f, m_Rotate* Time.deltaTime, 0.0f);
-            //transform.Rotate(Vector3.right * Time.deltaTime * m_Rotate);
-        }
-
+       
         //jump
         /*if (Input.GetKey(KeyCode.Space))
         {

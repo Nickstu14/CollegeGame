@@ -25,6 +25,7 @@ public class EnemySpawn : MonoBehaviour
     public GameObject m_EnemyPrefab;
     public Vector3 m_Eneypos;
     public List<GameObject> m_Enemies;
+    [Range(1,20)]
     public int m_EnemyCap;
 
 
