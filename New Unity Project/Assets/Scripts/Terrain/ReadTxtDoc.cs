@@ -7,6 +7,7 @@ public class ReadTxtDoc : MonoBehaviour
 {
     public StreamReader m_File;
     public string m_FileLoc;
+    public string m_ApplicationPath;
     public List<string> m_Level;
     public string m_Line;
     public CityObjects[] m_City;
@@ -14,13 +15,14 @@ public class ReadTxtDoc : MonoBehaviour
     public CityMap m_TempMap;
     private int m_Count;
 
+
     // Start is called before the first frame update
     void Start()
     {
-
+        m_ApplicationPath = Application.dataPath;
 
         if (m_FileLoc != null)
-            m_File = new StreamReader(@"" + m_FileLoc);
+            m_File = new StreamReader(@"" + m_ApplicationPath + );
 
 
         m_Level = new List<string>();

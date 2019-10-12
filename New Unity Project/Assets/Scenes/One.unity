@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &222297900
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -631,6 +631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FileLoc: E:\CollegeGame\New Unity Project\Assets\LevelTxt\Lv1.txt
+  m_ApplicationPath: 
   m_Level: []
   m_Line: 
   m_City:
