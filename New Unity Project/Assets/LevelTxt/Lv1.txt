@@ -1,3 +1,3 @@
-a{1}bc01
+abc01
 c0ab
-abc03
+abc02

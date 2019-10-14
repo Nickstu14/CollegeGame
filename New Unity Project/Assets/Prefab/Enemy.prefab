@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Duration: 0
   m_Direction: 0
   m_Speed: 30
-  m_RotateSpeed: 20
+  m_RotateSpeed: 10
   m_EnemyTotlal: {x: 0, y: 0, z: 0}
   m_Moving: 0.2
   m_Forward: 0.4
