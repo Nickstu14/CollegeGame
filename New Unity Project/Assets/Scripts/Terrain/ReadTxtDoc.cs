@@ -60,64 +60,63 @@ public class ReadTxtDoc : MonoBehaviour
 
             m_J++;
 
-            if (m_I+1 < _Line.Length)
-            {
-                if ((_Line[m_I +1] == '{') && (_Line[m_I + 3] == '}'))
-                { //Config from anouther file
-                    m_I++;
-                    m_TempMap = FindConfig(m_TempMap, _Line[m_I + 1]);
-                    m_I++;
-                }
-                else if (_Line[m_I+1] == '{' && _Line[m_I + 3] != '}')
-                { //internal config
-                    CityConfig m_cityConfig = CityConfig.Rotation;
-                    m_I++;
-                    do
-                    {
+            //if (m_I+1 < _Line.Length)
+            //{
+            //    if ((_Line[m_I +1] == '{') && (_Line[m_I + 3] == '}'))
+            //    { //Config from anouther file
+            //        m_I++;
+            //        m_TempMap = FindConfig(m_TempMap, _Line[m_I + 1]);
+            //        m_I++;
+            //    }
+            //    else if (_Line[m_I+1] == '{' && _Line[m_I + 3] != '}')
+            //    { //internal config
+            //        CityConfig m_cityConfig = CityConfig.Rotation;
+            //        m_I++;
+            //        do
+            //        {
 
-                        if (_Line[m_I] == '{' || _Line[m_I] == ' ')
-                        { // skip if any spaces or 
-                            m_I++;
-                        }
-                        else if (_Line[m_I] == ',')
-                        {
-                            m_cityConfig++;
-                            m_I++;
-                        }
-                        else
-                        {
-                            switch (m_cityConfig)
-                            {
-                                case CityConfig.Rotation:
-                                    m_TempMap.m_Rotation = _Line[m_I];
-                                    break;
-                                //case CityConfig.Scale: m_TempMap.m_Scale = _Line[m_I];
-                                //   break;
-                                case CityConfig.Colour:
-                                    m_TempMap = GetColour(m_TempMap, _Line, m_I);
-                                    break;
-                            }
-                            m_I++;
-                        }
+            //            if (_Line[m_I] == '{' || _Line[m_I] == ' ')
+            //            { // skip if any spaces or 
+            //                m_I++;
+            //            }
+            //            else if (_Line[m_I] == ',')
+            //            {
+            //                m_cityConfig++;
+            //                m_I++;
+            //            }
+            //            else
+            //            {
+            //                switch (m_cityConfig)
+            //                {
+            //                    case CityConfig.Rotation:
+            //                        m_TempMap.m_Rotation = _Line[m_I];
+            //                        break;
+            //                    //case CityConfig.Scale: m_TempMap.m_Scale = _Line[m_I];
+            //                    //   break;
+            //                    case CityConfig.Colour:
+            //                        m_TempMap = GetColour(m_TempMap, _Line, m_I);
+            //                        break;
+            //                }
+            //                m_I++;
+            //            }
 
-                    } while (_Line[m_I] != '}');
-                }
-                else
-                {
-                    //default config
-                    m_TempMap.m_Colour = Color.grey;
-                    m_TempMap.m_Rotation = Random.Range(0, 4);
-                }
-            }
-            else
-            {
+            //        } while (_Line[m_I] != '}');
+            //    }
+            //    else
+            //    {
+            //        //default config
+            //        m_TempMap.m_Colour = Color.grey;
+            //        m_TempMap.m_Rotation = Random.Range(0, 4);
+            //    }
+            //}
+            //else
+            //{
                 //default config
                 m_TempMap.m_Colour = Color.grey;
                 m_TempMap.m_Rotation = Random.Range(0, 4);
-            }
+            //}
             m_Map.Add(m_TempMap);
 
-            print(_Line[m_I]);
         }
     }
     CityMap FindConfig(CityMap _Data, char _Value)

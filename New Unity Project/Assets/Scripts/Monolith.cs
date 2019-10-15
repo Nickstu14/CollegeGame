@@ -9,6 +9,7 @@ public class Monolith : MonoBehaviour
     public float m_AlphaVal;
     public bool m_Bool;
     public float fadeSpeed = 0.1f;
+    public Color m_Colour;
     // Value used to know when the enemy has been spawned
     private float spawnTime;
 
@@ -17,13 +18,16 @@ public class Monolith : MonoBehaviour
     {
         m_Monolith = GetComponent<Renderer>().material;
         spawnTime = Time.time;
+        Color m_Colour = m_Monolith.color;
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-        //SetAlpha((Time.time - spawnTime) * fadeSpeed);
+        if (m_Colour.a <= 0)
+            SetAlpha((Time.time - spawnTime) * fadeSpeed);
+        else if (m_Colour.a >= 1)
+            SetAlpha((Time.time + spawnTime) * fadeSpeed);
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -35,8 +39,8 @@ public class Monolith : MonoBehaviour
     {
         // Here you assign a color to the referenced material,
         // changing the color of your renderer
-        Color color = m_Monolith.color;
-        color.a = Mathf.Clamp(alpha, 0, 1);
-        m_Monolith.color = color;
+        //Color m_Colour = m_Monolith.color;
+        m_Colour.a = Mathf.Clamp(alpha, 0, 1);
+        m_Monolith.color = m_Colour;
     }
 }
