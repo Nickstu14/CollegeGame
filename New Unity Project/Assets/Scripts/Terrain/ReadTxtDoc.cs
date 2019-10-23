@@ -89,7 +89,7 @@ public class ReadTxtDoc : MonoBehaviour
         for (int m_I = 0; m_I < m_Map.Count; m_I++)
         {
             //North
-            if (!((m_Map[m_I].m_Coor.y - 1) <= -1))
+            if (!((m_Map[m_I].m_Coor.y + 1) >= GetRowLength() + 1))
             {//If north of the cell is not less than 0
                 m_Map[m_I].m_Neighbour[0] = FindNeighbourCharacter(new Vector2(m_Map[m_I].m_Coor.x, m_Map[m_I].m_Coor.y - 1));
             }
@@ -107,7 +107,7 @@ public class ReadTxtDoc : MonoBehaviour
                 m_Map[m_I].m_Neighbour[1] = '#';
             }
             //South
-            if (!((m_Map[m_I].m_Coor.y + 1) <= GetRowLength() +1))
+            if (!((m_Map[m_I].m_Coor.y - 1) >= -1))
             {//If south of the cell is greater than the max number of rows
                 m_Map[m_I].m_Neighbour[2] = FindNeighbourCharacter(new Vector2(m_Map[m_I].m_Coor.x, m_Map[m_I].m_Coor.y +1));
             }
