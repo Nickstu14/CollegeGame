@@ -16,6 +16,7 @@ public class ReadTxtDoc : MonoBehaviour
     private CityMap m_TempMap;
     private int m_Count;
     public float m_Offset;
+    public bool[][] m_Grid;
 
 
     // Start is called before the first frame update
@@ -37,6 +38,8 @@ public class ReadTxtDoc : MonoBehaviour
         }
         m_File.Close();
 
+        MapNeighbour();
+
         SetLevel();
     }
 
@@ -48,111 +51,22 @@ public class ReadTxtDoc : MonoBehaviour
 
     void ReadMap(string _Line, int _Count)
     {
-        int m_J = 0;
+        //int m_J = 0;
 
         for (int m_I = 0; m_I < _Line.Length; m_I++)
         {
-            m_J = m_I;
+
             m_TempMap = new CityMap();
-            m_TempMap.m_Coor.x = m_J;
+            m_TempMap.m_Coor.x = m_I;
             m_TempMap.m_Coor.y = _Count;
             m_TempMap.m_Character = _Line[m_I];
 
-            m_J++;
+            m_TempMap.m_Colour = Color.grey;
+            m_TempMap.m_Rotation = Random.Range(0, 4);
 
-            //if (m_I+1 < _Line.Length)
-            //{
-            //    if ((_Line[m_I +1] == '{') && (_Line[m_I + 3] == '}'))
-            //    { //Config from anouther file
-            //        m_I++;
-            //        m_TempMap = FindConfig(m_TempMap, _Line[m_I + 1]);
-            //        m_I++;
-            //    }
-            //    else if (_Line[m_I+1] == '{' && _Line[m_I + 3] != '}')
-            //    { //internal config
-            //        CityConfig m_cityConfig = CityConfig.Rotation;
-            //        m_I++;
-            //        do
-            //        {
-
-            //            if (_Line[m_I] == '{' || _Line[m_I] == ' ')
-            //            { // skip if any spaces or 
-            //                m_I++;
-            //            }
-            //            else if (_Line[m_I] == ',')
-            //            {
-            //                m_cityConfig++;
-            //                m_I++;
-            //            }
-            //            else
-            //            {
-            //                switch (m_cityConfig)
-            //                {
-            //                    case CityConfig.Rotation:
-            //                        m_TempMap.m_Rotation = _Line[m_I];
-            //                        break;
-            //                    //case CityConfig.Scale: m_TempMap.m_Scale = _Line[m_I];
-            //                    //   break;
-            //                    case CityConfig.Colour:
-            //                        m_TempMap = GetColour(m_TempMap, _Line, m_I);
-            //                        break;
-            //                }
-            //                m_I++;
-            //            }
-
-            //        } while (_Line[m_I] != '}');
-            //    }
-            //    else
-            //    {
-            //        //default config
-            //        m_TempMap.m_Colour = Color.grey;
-            //        m_TempMap.m_Rotation = Random.Range(0, 4);
-            //    }
-            //}
-            //else
-            //{
-                //default config
-                m_TempMap.m_Colour = Color.grey;
-                m_TempMap.m_Rotation = Random.Range(0, 4);
-            //}
             m_Map.Add(m_TempMap);
 
         }
-    }
-    CityMap FindConfig(CityMap _Data, char _Value)
-    {
-
-
-        return _Data;
-    }
-
-    CityMap GetColour(CityMap _Data, string _Line, int _Value)
-    {
-        //string m_Colour;
-        //string m_Value;
-
-        if (_Line[_Value + 1] == '[')
-        { //[255,255,255]
-            do
-            {
-
-                _Value++;
-            } while (_Line[_Value] != ']');
-        }
-        else
-        {//colour
-
-
-            do
-            {
-                // m_Value += _Line[_Value];
-
-                _Value++;
-            } while (_Line[_Value] != ',');
-
-        }
-
-        return _Data;
     }
 
 
@@ -164,10 +78,98 @@ public class ReadTxtDoc : MonoBehaviour
         }
 
     }
-    /* Vector3 GetScale()
-     {
 
-     }*/
+    //int SetRotation()
+    //{
+
+    //}
+
+    void MapNeighbour()
+    {
+        for (int m_I = 0; m_I < m_Map.Count; m_I++)
+        {
+            //North
+            if (!((m_Map[m_I].m_Coor.y - 1) <= -1))
+            {//If north of the cell is not less than 0
+                m_Map[m_I].m_Neighbour[0] = FindNeighbourCharacter(new Vector2(m_Map[m_I].m_Coor.x, m_Map[m_I].m_Coor.y - 1));
+            }
+            else
+            {
+                m_Map[m_I].m_Neighbour[0] = '#';
+            }
+            //East
+            if (!((m_Map[m_I].m_Coor.x + 1) >= GetRowWidth((int)m_Map[m_I].m_Coor.y)+1))
+            {//If east of the cell is greater than the width of that row
+                m_Map[m_I].m_Neighbour[1] = FindNeighbourCharacter(new Vector2(m_Map[m_I].m_Coor.x+1, m_Map[m_I].m_Coor.y));
+            }
+            else
+            {
+                m_Map[m_I].m_Neighbour[1] = '#';
+            }
+            //South
+            if (!((m_Map[m_I].m_Coor.y + 1) <= GetRowLength() +1))
+            {//If south of the cell is greater than the max number of rows
+                m_Map[m_I].m_Neighbour[2] = FindNeighbourCharacter(new Vector2(m_Map[m_I].m_Coor.x, m_Map[m_I].m_Coor.y +1));
+            }
+            else
+            {
+                m_Map[m_I].m_Neighbour[2] = '#';
+            }
+            //West
+            if (!((m_Map[m_I].m_Coor.x - 1) <= -1))
+            {//If west of the cell is not less than 0
+                m_Map[m_I].m_Neighbour[3] = FindNeighbourCharacter(new Vector2(m_Map[m_I].m_Coor.x - 1, m_Map[m_I].m_Coor.y));
+            }
+            else
+            {
+                m_Map[m_I].m_Neighbour[3] = '#';
+            }
+        }
+    }
+
+    int GetRowWidth(int _Row)
+    {
+        int m_TempVal = 0;
+
+        foreach (CityMap m_CM in m_Map)
+        {
+            if (m_CM.m_Coor.y == _Row)
+            {
+                if (m_TempVal >= m_CM.m_Coor.x)
+                {
+                    m_TempVal = (int)m_CM.m_Coor.x;
+                }
+
+            }
+        }
+        return m_TempVal;
+    }
+    int GetRowLength()
+    {
+        int m_TempVal = 0;
+
+        foreach (CityMap m_CM in m_Map)
+        {
+            if (m_TempVal >= m_CM.m_Coor.y)
+            {
+                m_TempVal = (int)m_CM.m_Coor.y;
+            }
+        }
+        return m_TempVal;
+    }
+
+    char FindNeighbourCharacter(Vector2 _Coords)
+    {
+        foreach (CityMap m_CM in m_Map)
+        {
+            if ((m_CM.m_Coor.x == _Coords.x) && (m_CM.m_Coor.y == _Coords.y))
+            {
+                return m_CM.m_Character;
+            }
+        }
+        return '~';
+    }
+
 
     GameObject GetObject(char _Character)
     {
@@ -218,6 +220,9 @@ public class ReadTxtDoc : MonoBehaviour
         public int m_Rotation;
         //public Vector3 m_Scale;
         public Color m_Colour;
+        //m_Neighbour will hold the character 
+        //of it's neightbour otherwise hold # as empty or out of map
+        public char[] m_Neighbour = new char[4];
     }
     private enum CityConfig
     {
