@@ -12,8 +12,6 @@ public class QuitButton : MonoBehaviour
     void Start()
     {
         m_Material = gameObject.GetComponent<Renderer>();
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     // Update is called once per frame

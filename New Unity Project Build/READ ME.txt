@@ -1,0 +1,8 @@
+You can modify the level by using the txt file in :
+..\Resources\LevelTxt
+
+a-d are different buildings
+0-5 are different roads
+3 - player spawner(is needed)
+~ exit back to the menu screen
+5 - Enemy spawner

@@ -25,7 +25,7 @@ public class CoinSpawn : MonoBehaviour
         if(other.tag == "Player")
         {
             m_CoinVal = m_Coin.GetValue();
-            other.GetComponent<Score>().UpdateScore(m_CoinVal);
+            //other.GetComponent<Score>().UpdateScore(m_CoinVal);
             m_Coin.Destroy();
             
         }

@@ -11,9 +11,9 @@ public class EnemySpawn : MonoBehaviour
     private SphereCollider m_SC;
 
     [Header("Player")]
-    public GameObject m_Player;
-    public SphereCollider m_PlayerSphere;
-    public float m_PlayerRadus;
+   // public GameObject m_Player;
+   // public SphereCollider m_PlayerSphere;
+    //public float m_PlayerRadus;
 
     [Header("Map Dims")]
     public float m_Width;
@@ -25,28 +25,28 @@ public class EnemySpawn : MonoBehaviour
     public GameObject m_EnemyPrefab;
     public Vector3 m_Eneypos;
     public List<GameObject> m_Enemies;
-    [Range(1,20)]
+    [Range(1,5)]
     public int m_EnemyCap;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        m_Player = GameObject.Find("Player");
-        m_PlayerSphere = m_Player.GetComponent<SphereCollider>();
-        m_PlayerRadus = m_PlayerSphere.radius;
+       // m_Player = GameObject.Find("Player");
+       // m_PlayerSphere = m_Player.GetComponent<SphereCollider>();
+       // m_PlayerRadus = m_PlayerSphere.radius;
 
         if (m_Width == 0.0f)
-            m_Width = 10f;
+            m_Width = 5f;
         if (m_Length == 0.0f)
-            m_Length = 10f;
+            m_Length = 5f;
 
         //Get spawner gameobject
         m_SpawnLoc = this.gameObject;
         //calculate spawner location which will be outside the radius of the player
         m_SpawnPos = new Vector3(0, 0, 0);
         //set spawning position
-        m_SpawnLoc.transform.position = CalculateEnemySpawnPos();
+        m_SpawnLoc.transform.position = m_SpawnLoc.transform.position; //CalculateEnemySpawnPos();
 
         //get the spawning radius to spawn in enemies
         m_SC = m_SpawnLoc.GetComponent<SphereCollider>();
@@ -82,9 +82,9 @@ public class EnemySpawn : MonoBehaviour
     {
        Vector3 m_Loc = new Vector3();
 
-        m_Loc.x = Random.Range((m_Player.transform.position.x - m_PlayerRadus) - m_Min, (m_Player.transform.position.x + m_PlayerRadus) + m_Length);
-        m_Loc.z = Random.Range((m_Player.transform.position.z - m_PlayerRadus) - m_Min, (m_Player.transform.position.z + m_PlayerRadus) + m_Width);
-        m_Loc.y = m_Player.transform.position.y;
+        //m_Loc.x = Random.Range((m_Player.transform.position.x - m_PlayerRadus) - m_Min, (m_Player.transform.position.x + m_PlayerRadus) + m_Length);
+        //m_Loc.z = Random.Range((m_Player.transform.position.z - m_PlayerRadus) - m_Min, (m_Player.transform.position.z + m_PlayerRadus) + m_Width);
+        //m_Loc.y = m_Player.transform.position.y;
 
         return m_Loc;
     }
@@ -99,4 +99,6 @@ public class EnemySpawn : MonoBehaviour
 
         return m_Loc;
     }
+
+
 }

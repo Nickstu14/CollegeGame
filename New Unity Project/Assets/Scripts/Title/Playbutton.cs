@@ -9,6 +9,8 @@ public class Playbutton : MonoBehaviour
     public Material m_Hover;
     public Renderer m_Material;
 
+    public GameObject m_QuitBox;
+
     
     // Start is called before the first frame update
     void Start()
@@ -22,10 +24,6 @@ public class Playbutton : MonoBehaviour
     {
         
     }
-    public void OnMouseDown()
-    {
-        SceneManager.LoadScene(1);
-    }
     public void OnMouseOver()
     {
         m_Material.material = m_Hover;
@@ -34,4 +32,10 @@ public class Playbutton : MonoBehaviour
     {
         m_Material.material = m_Original;
     }
+    public void OnMouseDown()
+    {
+        m_QuitBox.SetActive(true);
+        SceneManager.LoadScene("One");
+    }
+
 }

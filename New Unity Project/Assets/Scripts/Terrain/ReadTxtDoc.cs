@@ -25,7 +25,7 @@ public class ReadTxtDoc : MonoBehaviour
         m_ApplicationPath = Application.dataPath;
 
         if (m_FileLoc != null)
-            m_File = new StreamReader(@"" + m_ApplicationPath + "\\LevelTxt\\" + LevelName + ".txt");
+            m_File = new StreamReader(@"" + m_ApplicationPath + "\\Resources\\LevelTxt\\" + LevelName + ".txt");
 
 
         m_Level = new List<string>();
@@ -74,7 +74,8 @@ public class ReadTxtDoc : MonoBehaviour
     {
         foreach (CityMap m_MO in m_Map)
         {
-            GameObject m_Level = Instantiate(GetObject(m_MO.m_Character), new Vector3(m_MO.m_Coor.x * m_Offset, 0, m_MO.m_Coor.y * m_Offset), GetRotation(m_MO.m_Rotation), transform.parent);
+            GameObject m_Level = Instantiate(GetObject(m_MO.m_Character), new Vector3(m_MO.m_Coor.x * m_Offset, 0, m_MO.m_Coor.y * m_Offset), GetRotation(m_MO.m_Rotation), transform);
+            
         }
 
     }
