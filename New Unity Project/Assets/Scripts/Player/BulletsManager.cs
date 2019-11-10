@@ -10,8 +10,9 @@ public class BulletsManager : MonoBehaviour
     
     [Space(2)][Header("Bullets")][Range(1, 100)]
     public int m_MaxBullet;
-    public List<GameObject> m_BulletList;
+    //public List<GameObject> m_BulletList;
     private int m_BulletCount;
+    
     [Space(2)]
     [Header("Individual Bullets")]
     [Range(0.1f, 10f)]
@@ -22,7 +23,8 @@ public class BulletsManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        m_BulletList = new List<GameObject>();
+        //m_BulletList = new List<GameObject>();
+
     }
 
     // Update is called once per frame
@@ -31,11 +33,12 @@ public class BulletsManager : MonoBehaviour
         //on click  shoot
         if (Input.GetMouseButton(0))//Input.GetMouseButtonDown(0))
         {
-            if (/*m_BulletList.Count*/ m_Spawn.transform.childCount< m_MaxBullet)
+            if (m_BulletCount< m_MaxBullet)
             {
-                /*GameObject m_BulletInstance = Instantiate(m_Bullet, m_Spawn.transform.position, new Quaternion(90.0f, 0.0f, 0.0f, 0.0f));
+                GameObject m_BulletInstance = Instantiate(m_Bullet, m_Spawn.transform.position, new Quaternion(90.0f, 0.0f, 0.0f, 0.0f));
                 m_BulletInstance.GetComponent<Rigidbody>().AddForce(m_Spawn.transform.forward * m_BulletSpeed);
-                m_BulletInstance.transform.parent = m_Spawn.transform;*/
+                m_BulletInstance.transform.parent = m_Spawn.transform;
+                m_BulletCount++;
                 //m_BulletList.Add(m_BulletInstance);
                 //Debug.Log(m_Spawn.transform.childCount);
             }
@@ -55,5 +58,9 @@ public class BulletsManager : MonoBehaviour
                 m_BulletCount++;
             }
         }*/
+    }
+    public void BulletDeleted()
+    {
+        m_BulletCount--;
     }
 }
