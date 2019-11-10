@@ -11,8 +11,7 @@ public class Bullet : MonoBehaviour
     public int m_Damage;
     public float m_TimeAlive;
     public BulletsManager m_BM;
-    //public float m_BulletDuration;
-    //public List<Vector3> m_Pos = new List<Vector3>();
+   
     // Use this for initialization
     void Start()
     {

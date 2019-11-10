@@ -11,7 +11,7 @@ public class CoinSpawn : MonoBehaviour
     void Start()
     {
         m_Collider = GetComponent<Collider>();
-        //m_Coin = GetComponentInChildren<GameObject>().GetComponent<CoinCollect>();
+        m_Coin = GetComponentInChildren<CoinCollect>();
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class CoinSpawn : MonoBehaviour
         if(other.tag == "Player")
         {
             m_CoinVal = m_Coin.GetValue();
-            //other.GetComponent<Score>().UpdateScore(m_CoinVal);
+            other.GetComponent<Score>().UpdateScore(m_CoinVal);
             m_Coin.Destroy();
             
         }

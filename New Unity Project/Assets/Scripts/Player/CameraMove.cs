@@ -57,7 +57,7 @@ public class CameraMove : MonoBehaviour
     public float m_XLoc = 45f;
     [Header("Visability")]
     public bool m_CursorLock;
-    private bool m_cursorIsLocked;//= true;
+    private bool m_cursorIsLocked = true;
 
     // Use this for initialization
     void Start()
@@ -100,13 +100,13 @@ public class CameraMove : MonoBehaviour
 
         if (m_cursorIsLocked)
         {
-           // Cursor.lockState = CursorLockMode.Locked;
-           // Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         else
         {
-           // Cursor.lockState = CursorLockMode.None;
-           // Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 

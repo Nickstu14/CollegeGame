@@ -34,7 +34,7 @@ public class Playbutton : MonoBehaviour
     }
     public void OnMouseDown()
     {
-        m_QuitBox.SetActive(true);
+        //m_QuitBox.SetActive(true);
         SceneManager.LoadScene("One");
     }
 

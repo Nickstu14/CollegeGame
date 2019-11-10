@@ -8,7 +8,7 @@ public class CoinCollect : MonoBehaviour
 
     public void Start()
     {
-        m_Value = 5;
+        m_Value = 10;
     }
 
     public int GetValue()

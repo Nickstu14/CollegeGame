@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class ReadTxtDoc : MonoBehaviour
 {
@@ -17,15 +18,17 @@ public class ReadTxtDoc : MonoBehaviour
     private int m_Count;
     public float m_Offset;
     public bool[][] m_Grid;
+    public Text m_Text;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        m_ApplicationPath = Application.dataPath;
+        m_ApplicationPath = Application.dataPath + "/Resources/LevelTxt/" + LevelName + ".txt";
+        m_Text.text = m_ApplicationPath;
 
         if (m_FileLoc != null)
-            m_File = new StreamReader(@"" + m_ApplicationPath + "\\Resources\\LevelTxt\\" + LevelName + ".txt");
+            m_File = new StreamReader(@"" + m_ApplicationPath);
 
 
         m_Level = new List<string>();
@@ -231,6 +234,8 @@ public class ReadTxtDoc : MonoBehaviour
         // Scale = 2,
         Colour
     }
+
+   
 
 }
 

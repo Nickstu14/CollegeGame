@@ -1,3 +1,9 @@
 abcdabcdabcd
-30000050000~
-cdabcdabcdab
+300000500000
+cd0bcdabcdab
+cd01120bcdab
+bc0abcdabbcd
+ad0bcdabcdab
+cd5bcdabcdab
+00000500000~
+abcdabcdabcd

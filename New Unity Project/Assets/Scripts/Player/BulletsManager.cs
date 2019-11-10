@@ -11,7 +11,7 @@ public class BulletsManager : MonoBehaviour
     [Space(2)][Header("Bullets")][Range(1, 100)]
     public int m_MaxBullet;
     //public List<GameObject> m_BulletList;
-    private int m_BulletCount;
+    public int m_BulletCount;
     
     [Space(2)]
     [Header("Individual Bullets")]
@@ -23,7 +23,6 @@ public class BulletsManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //m_BulletList = new List<GameObject>();
 
     }
 
@@ -39,28 +38,14 @@ public class BulletsManager : MonoBehaviour
                 m_BulletInstance.GetComponent<Rigidbody>().AddForce(m_Spawn.transform.forward * m_BulletSpeed);
                 m_BulletInstance.transform.parent = m_Spawn.transform;
                 m_BulletCount++;
-                //m_BulletList.Add(m_BulletInstance);
-                //Debug.Log(m_Spawn.transform.childCount);
             }
         }
 
-        /*m_BulletCount = 0;
-        if (m_BulletList.Count != 0)
-        {
-            foreach (GameObject m_B in m_BulletList)
-            {
-                if (m_B.GetComponent<BulletControll>().GetTime() >= m_BulletDuration)
-                {
-                    m_B.GetComponent<BulletControll>().SetDelete();
-                    m_BulletList.RemoveAt(0);
-                    // Debug.Log("Destroyed");
-                }
-                m_BulletCount++;
-            }
-        }*/
+       
     }
     public void BulletDeleted()
     {
-        m_BulletCount--;
+        if (!(m_BulletCount < 0 ))
+            m_BulletCount--;
     }
 }

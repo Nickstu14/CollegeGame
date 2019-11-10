@@ -124,7 +124,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 0.05, z: 1.5}
   m_Children:
   - {fileID: 513533607}
-  m_Father: {fileID: 7320867002771188504}
+  m_Father: {fileID: 4405796133991746136}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1154495331
@@ -290,7 +290,6 @@ GameObject:
   - component: {fileID: 7320867001981434995}
   - component: {fileID: 7320867001981434994}
   - component: {fileID: 7320867001981434992}
-  - component: {fileID: 7320867001981435007}
   - component: {fileID: 7320867001981434996}
   m_Layer: 0
   m_Name: Main Camera
@@ -310,7 +309,7 @@ Transform:
   m_LocalPosition: {x: 1.8480004, y: 1.349, z: -2.9070017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7320867002771188504}
+  m_Father: {fileID: 4405796133991746136}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 17.734001, y: -2, z: 0}
 --- !u!20 &7320867001981434994
@@ -358,14 +357,6 @@ Camera:
   m_StereoSeparation: 0.022
 --- !u!124 &7320867001981434992
 Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7320867001981435006}
-  m_Enabled: 1
---- !u!81 &7320867001981435007
-AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -501,7 +492,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7320867002771188504}
+  - component: {fileID: 4405796133991746136}
   - component: {fileID: 7320867002771188487}
   - component: {fileID: 7320867002771188486}
   - component: {fileID: 7320867002771188485}
@@ -509,6 +500,7 @@ GameObject:
   - component: {fileID: 7320867002771188507}
   - component: {fileID: 7320867002771188506}
   - component: {fileID: 7320867002771188508}
+  - component: {fileID: 656898835}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -516,15 +508,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7320867002771188504
-Transform:
+--- !u!224 &4405796133991746136
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7320867002771188484}
   m_LocalRotation: {x: 0, y: 0.07054865, z: 0, w: 0.9975084}
-  m_LocalPosition: {x: 122.8, y: 1.5, z: 386.6}
+  m_LocalPosition: {x: 0, y: 0, z: 386.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7320867003262403622}
@@ -534,6 +526,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 8.091001, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 122.8, y: 1.5}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &7320867002771188487
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -608,7 +605,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 94
   m_CollisionDetection: 0
 --- !u!135 &7320867002771188507
 SphereCollider:
@@ -662,6 +659,22 @@ MonoBehaviour:
   m_Title: 
   m_Player: 1
   m_Health: 0
+--- !u!114 &656898835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7320867002771188484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581798e850b229b4580542a70ec89dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Canvas: {fileID: 0}
+  m_Text: {fileID: 0}
+  m_Score: 0
+  m_ScoreString: 
 --- !u!1 &7320867002927436268
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +706,7 @@ Transform:
   - {fileID: 7320867002054503003}
   - {fileID: 7320867001612696342}
   - {fileID: 7320867003171925898}
-  m_Father: {fileID: 7320867002771188504}
+  m_Father: {fileID: 4405796133991746136}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7320867002927436270
@@ -711,7 +724,7 @@ MonoBehaviour:
   m_Spawn: {fileID: 7320867003226063018}
   m_Bullet: {fileID: 1451080744718994, guid: ddad877bf36307649a30f26cad3d6f87, type: 3}
   m_MaxBullet: 20
-  m_BulletList: []
+  m_BulletCount: 0
   m_BulletDuration: 0.5
   m_BulletSpeed: 10000
 --- !u!1 &7320867003171925897
@@ -845,6 +858,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7320867002771188504}
+  m_Father: {fileID: 4405796133991746136}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
