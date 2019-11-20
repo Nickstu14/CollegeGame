@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 8216078876149757634}
   m_Layer: 0
   m_Name: Building
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 5687713044498069141}
   m_Layer: 0
   m_Name: Building (1)
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 4499493525259392448}
   m_Layer: 0
   m_Name: Building (2)
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

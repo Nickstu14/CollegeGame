@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float m_Force;
     public float m_JumpForce;
     public bool m_Jump;
+    private bool m_Stop;
     public bool m_Jumping;
     public float m_Rotate;
     private Rigidbody m_RB;
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         m_RB = GetComponent<Rigidbody>();
         m_Jump = false;
+        m_Stop = false;
         m_SC = GetComponent<SphereCollider>();
         if (m_SC.isTrigger == false)
         {
@@ -35,28 +37,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        //movement
-        /*if (Input.GetKey(KeyCode.W))
-        {
-            //m_RB.AddForce(transform.forward * m_Force);
-            transform.position = new Vector3(transform.position * m_Force)
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            m_RB.AddForce(transform.right * m_Force);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            m_RB.AddForce(-transform.right * m_Force);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            m_RB.AddForce(-transform.forward * m_Force);
-        }*/
-
         //get the Input from Horizontal axis
-        m_Input = new Vector2( Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        m_Input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         m_Input = Vector2.ClampMagnitude(m_Input, 1);
+
+
         //get the Input from Vertical axis
 
         m_CamF = m_MainCam.transform.forward;
@@ -68,9 +54,9 @@ public class PlayerMovement : MonoBehaviour
         m_CamR = m_CamR.normalized;
 
         transform.position += (m_CamF * m_Input.y + m_CamR * m_Input.x) * Time.deltaTime * m_Force;
-        
 
-       
+
+
         //jump
         /*if (Input.GetKey(KeyCode.Space))
         {
@@ -115,8 +101,28 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        
-        if (other.tag == "Bullet" && gameObject.tag != "Player") 
+
+        if (other.tag == "Bullet" && gameObject.tag != "Player")
             gameObject.GetComponent<Details>().ModHealth(other.GetComponent<Bullet>().GetDamage());
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Building")  // or if(gameObject.CompareTag("YourWallTag"))
+        {
+            print("HIT Building");
+            //m_RB.velocity = Vector3.zero;
+            m_Stop = true;
+        }
+    }
+    void OnCollisionExit(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Building")  // or if(gameObject.CompareTag("YourWallTag"))
+        {
+            print("Move away");
+            //m_RB.velocity = Vector3.zero;
+            m_Stop = false;
+        }
     }
 }

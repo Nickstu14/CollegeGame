@@ -388,7 +388,7 @@ MonoBehaviour:
   m_CamDistance: 1.43
   m_MouseSensitivity: 5
   m_YMaxLoc: 45
-  m_YMinLoc: 1
+  m_YMinLoc: 15
   m_XLoc: 45
   m_CursorLock: 0
 --- !u!1 &7320867002054503002
